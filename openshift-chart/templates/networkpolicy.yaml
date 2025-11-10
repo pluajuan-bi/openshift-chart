@@ -2,12 +2,21 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: {{ .Values.name }}-np
+  name: {{ .Values.name }}-{{ .Values.networkPolicy.name }}
+  namespace: {{ .Values.networkPolicy.namespace }}
 spec:
   podSelector:
     matchLabels:
-      app: {{ .Values.name }}
+      app: {{ .Values.networkPolicy.podSelector.app }}
   policyTypes:
     - Ingress
     - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: {{ .Values.networkPolicy.fromSelector.app }}
+      ports:
+        - protocol: {{ .Values.networkPolicy.protocol }}
+          port: {{ .Values.networkPolicy.port }}
 {{- end }}
