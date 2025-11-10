@@ -1,3 +1,4 @@
+name: proyecto-openshift
 # Namespace donde se desplegarán los recursos
 namespace: "pluaj-dev-dev"
 

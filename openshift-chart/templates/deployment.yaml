@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ .Values.name }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ .Release.Name }}
+    app: {{ .Values.name }}
     areanegocio: tecnologia
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: {{ .Values.name}}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        app: {{ .Values.name}}
     spec:
       containers:
-        - name: {{ .Release.Name }}-container
+        - name: {{ .Values.name }}-container
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: Always
           ports:
@@ -31,9 +31,9 @@ spec:
               memory: {{ .Values.resources.limits.memory }}
           envFrom:
             - configMapRef:
-                name: {{ .Release.Name }}-configmap
+                name: {{ .Values.name }}-configmap
             - secretRef:
-                name: {{ .Release.Name }}-secret
+                name: {{ .Values.name }}-secret
           livenessProbe:
             httpGet:
               path: /
