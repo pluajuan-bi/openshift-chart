@@ -19,7 +19,7 @@ spec:
       containers:
         - name: app
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-	        imagePullPolicy: Always
+          imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.service.port }}
           resources:
@@ -29,7 +29,7 @@ spec:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
               memory: {{ .Values.resources.limits.memory }}
-         livenessProbe:
+            livenessProbe:
             httpGet:
               path: /
               port: {{ .Values.service.port }}
