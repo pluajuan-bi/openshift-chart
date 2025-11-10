@@ -1,35 +1,24 @@
 # Namespace donde se desplegarán los recursos
 namespace: "pluaj-dev-dev"
 
-# Configuración del backend
-backend:
-  enabled: true  # Habilitar/deshabilitar backend
-  image:
-    repository: "juangrp/shadcn-datatable-practica"
-    tag: "latest"
-  replicas: 1
-  resources:
-    requests:
-      cpu: "500m"
-      memory: "800Mi"
-    limits:
-      cpu: "1000m"
-      memory: "1500Mi"
-  route:
-    enabled: true
-    host: "backend.example.com"
+replicas: 1
+image:
+  repository: "juangrp/shadcn-datatable-practica"
+  tag: "latest"
 
-# Configuración del frontend
-frontend:
-  enabled: true
-  image:
-    repository: "juangrp/frontend-app"
-    tag: "latest"
-  replicas: 1
-  route:
-    enabled: true
-    host: "frontend.example.com"
+resources:
+  requests:
+    cpu: "500m"
+    memory: "800Mi"
+  limits:
+    cpu: "1000m"
+    memory: "1500Mi"
 
+# configuracion service 
+service:
+  type: ClusterIP   # Tipo de servicio (ClusterIP, NodePort, LoadBalancer)
+  port: 3000        # Puerto del servicio
+  
 # Configuración de la base de datos PostgreSQL
 database:
   enabled: true
@@ -57,3 +46,23 @@ hpa:
     minReplicas: 1
     maxReplicas: 3
     cpuUtilization: 80
+
+# configuracion de secret 
+secret:
+  enabled: true
+  username: admin
+  password: superseguro
+
+#configuracion de route
+route:
+  enabled: true
+  host: miapp.midominio.com
+
+#configuracion pvc 
+pvc:
+  enabled: true
+  size: 1Gi
+
+#configuracion network
+networkPolicy:
+  enabled: true

@@ -2,6 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Release.Name }}
+    areanegocio: tecnologia
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -15,5 +19,6 @@ spec:
       containers:
         - name: app
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+	  imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.service.port }}
