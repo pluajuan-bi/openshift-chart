@@ -1,4 +1,4 @@
-name: proyecto-openshift
+name: frontend-openshift
 # Namespace donde se desplegarán los recursos
 namespace: "pluaj-dev-dev"
 
@@ -67,9 +67,9 @@ networkPolicy:
   enabled: true  # Habilitar/deshabilitar la creación de la NetworkPolicy
   name: allow-to-backend-ingress  # Nombre de la política
   podSelector:
-    app: mi-app-dt-clone  # Selector de pods destino
+    app: backend-openshift  # Selector de pods destino
   fromSelector:
-    app: mi-app-dt-helm  # Selector de pods origen
+    app: frontend-openshift  # Selector de pods origen
   port: 8082  #  Puerto de destino en micro-b (ajústalo según tu app) 
   protocol: TCP  # Protocolo permitido
 
