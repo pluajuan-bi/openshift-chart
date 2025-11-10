@@ -17,7 +17,7 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-        - name: app
+        - name: {{ .Release.Name }}-container
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: Always
           ports:
@@ -31,7 +31,7 @@ spec:
               memory: {{ .Values.resources.limits.memory }}
           envFrom:
             - configMapRef:
-                name: {{ .Release.Name }}-config
+                name: {{ .Release.Name }}-configmap
             - secretRef:
                 name: {{ .Release.Name }}-secret
           livenessProbe:

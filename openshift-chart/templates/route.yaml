@@ -2,10 +2,14 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ .Release.Name }}-route
+  namespace: {{ .Values.namespace }}
 spec:
-  host: {{ .Values.route.host }}
   to:
     kind: Service
-    name: {{ .Release.Name }}
+    name: {{ .Release.Name }}-service
+  port:
+    targetPort: http
+  tls:
+    termination: edge
 {{- end }}
