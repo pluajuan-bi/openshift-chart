@@ -1,0 +1,59 @@
+# Namespace donde se desplegarán los recursos
+namespace: "pluaj-dev-dev"
+
+# Configuración del backend
+backend:
+  enabled: true  # Habilitar/deshabilitar backend
+  image:
+    repository: "juangrp/shadcn-datatable-practica"
+    tag: "latest"
+  replicas: 1
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "800Mi"
+    limits:
+      cpu: "1000m"
+      memory: "1500Mi"
+  route:
+    enabled: true
+    host: "backend.example.com"
+
+# Configuración del frontend
+frontend:
+  enabled: true
+  image:
+    repository: "juangrp/frontend-app"
+    tag: "latest"
+  replicas: 1
+  route:
+    enabled: true
+    host: "frontend.example.com"
+
+# Configuración de la base de datos PostgreSQL
+database:
+  enabled: true
+  image:
+    repository: "postgres"
+  pvc:
+    size: "1Gi"
+    storageClassName: "gp3"
+  credentials:
+    user: "admin"
+    password: "admin"
+    name: "openshift-db"
+  service:
+    port: 5432
+
+# Configuración de HPA
+hpa:
+  backend:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    cpuUtilization: 80
+  frontend:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    cpuUtilization: 80
