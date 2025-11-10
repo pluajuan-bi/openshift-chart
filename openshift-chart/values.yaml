@@ -67,7 +67,7 @@ networkPolicy:
   enabled: true  # Habilitar/deshabilitar la creación de la NetworkPolicy
   name: allow-to-backend-ingress  # Nombre de la política
   podSelector:
-    app: backend-openshift  # Selector de pods destino
+    app: backend-openshift  # Selector de pods destino - Aplica esta política a los pods etiquetados como micro-b
   fromSelector:
     app: frontend-openshift  # Selector de pods origen
   port: 8082  #  Puerto de destino en micro-b (ajústalo según tu app) 
