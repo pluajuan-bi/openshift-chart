@@ -34,7 +34,7 @@ jobs:
      
       - name: Deploy files
         run: |
-          sed -i "s|{{ version }}|${{ github.run_number }}|g" ./mi-chart/Chart.yaml
+          sed -i "s|{{ version }}|${{ github.run_number }}|g" ./openshift-chart/Chart.yaml
           cat ./mi-chart/Chart.yaml
           helm package ./mi-chart
  
