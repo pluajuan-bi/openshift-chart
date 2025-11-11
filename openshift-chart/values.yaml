@@ -1,11 +1,11 @@
-name: frontend-openshift
+name: openshift-backend
 # Namespace donde se desplegarán los recursos
 namespace: "pluaj-dev-dev"
 
 replicas: 1
 image:
-  repository: "juangrp/shadcn-datatable-practica"
-  tag: "latest"
+  repository: "juangrp/openshift-backend"
+  tag: "v1.0.0"
 
 resources:
   requests:
@@ -18,7 +18,7 @@ resources:
 # configuracion service 
 service:
   type: ClusterIP   # Tipo de servicio (ClusterIP, NodePort, LoadBalancer)
-  port: 3000        # Puerto del servicio
+  port: 9082        # Puerto del servicio
 
 #configuracion env 
 appType: backend # o frontend
@@ -49,7 +49,6 @@ secret:
 #configuracion de route
 route:
   enabled: true
-  host: miapp.midominio.com
 
 #configuracion pvc 
 pvc:
@@ -58,12 +57,12 @@ pvc:
 
 #configuracion network
 networkPolicy:
-  enabled: true  # Habilitar/deshabilitar la creación de la NetworkPolicy
+  enabled: false  # Habilitar/deshabilitar la creación de la NetworkPolicy
   name: allow-to-backend-ingress  # Nombre de la política
   podSelector:
     app: backend-openshift  # Selector de pods destino - Aplica esta política a los pods etiquetados como micro-b
   fromSelector:
     app: frontend-openshift  # Selector de pods origen
-  port: 8082  #  Puerto de destino en micro-b (ajústalo según tu app) 
+  port: 9082  #  Puerto de destino en micro-b (ajústalo según tu app) 
   protocol: TCP  # Protocolo permitido
 
