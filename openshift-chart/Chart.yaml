@@ -2,5 +2,5 @@ apiVersion: v2
 name: openshift-chart
 type: application
 description: Helm Chart para backend, frontend y PostgreSQL en OpenShift
-version: 1.0.0
+version: {{ version }}
 appVersion: "v1.16.0"
