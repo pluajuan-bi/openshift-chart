@@ -21,14 +21,13 @@ service:
   port: 3000        # Puerto del servicio
 
 #configuracion env 
-
+appType: backend # o frontend
 env:
   backend:
     SPRING_DATASOURCE_URL: "jdbc:postgresql://openshift-db-postgresql.pluaj-dev-dev.svc.cluster.local:5432/dbUsuarios"
     SPRING_DATASOURCE_USERNAME: "pluaj"
     SPRING_DATASOURCE_PASSWORD: "Pichincha1"
-  frontend:
-    NEXT_PUBLIC_API_URL: "http://backend-openshift:9082"
+
 
 # Configuración de HPA
 hpa:
