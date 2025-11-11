@@ -54,6 +54,7 @@ route:
 pvc:
   enabled: true
   size: 1Gi
+  storageClass: gp3
 
 #configuracion network
 networkPolicy:
