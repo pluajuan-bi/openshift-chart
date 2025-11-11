@@ -34,6 +34,18 @@ spec:
                 name: {{ .Values.name }}-configmap
             - secretRef:
                 name: {{ .Values.name }}-secret
+          env:
+{{- if eq .Values.appType "backend" }}
+            - name: SPRING_DATASOURCE_URL
+              value: {{ .Values.env.backend.SPRING_DATASOURCE_URL | quote }}
+            - name: SPRING_DATASOURCE_USERNAME
+              value: {{ .Values.env.backend.SPRING_DATASOURCE_USERNAME | quote }}
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: {{ .Values.env.backend.SPRING_DATASOURCE_PASSWORD | quote }}
+{{- else if eq .Values.appType "frontend" }}
+            - name: NEXT_PUBLIC_API_URL
+              value: {{ .Values.env.frontend.NEXT_PUBLIC_API_URL | quote }}
+{{- end }}
           livenessProbe:
             httpGet:
               path: /

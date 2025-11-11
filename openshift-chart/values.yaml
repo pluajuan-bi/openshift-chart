@@ -19,21 +19,16 @@ resources:
 service:
   type: ClusterIP   # Tipo de servicio (ClusterIP, NodePort, LoadBalancer)
   port: 3000        # Puerto del servicio
-  
-# Configuración de la base de datos PostgreSQL
-database:
-  enabled: true
-  image:
-    repository: "postgres"
-  pvc:
-    size: "1Gi"
-    storageClassName: "gp3"
-  credentials:
-    user: "admin"
-    password: "admin"
-    name: "openshift-db"
-  service:
-    port: 5432
+
+#configuracion env 
+
+env:
+  backend:
+    SPRING_DATASOURCE_URL: "jdbc:postgresql://openshift-db-postgresql.pluaj-dev-dev.svc.cluster.local:5432/dbUsuarios"
+    SPRING_DATASOURCE_USERNAME: "pluaj"
+    SPRING_DATASOURCE_PASSWORD: "Pichincha1"
+  frontend:
+    NEXT_PUBLIC_API_URL: "http://backend-openshift:9082"
 
 # Configuración de HPA
 hpa:
